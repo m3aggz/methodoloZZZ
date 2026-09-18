@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Home Screen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SN+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'SN Pro Local';
+      src: url('./fonts/SNPro-Regular.woff2') format('woff2'),
+           url('./fonts/SNPro-SemiBold.woff2') format('woff2'),
+           url('./fonts/SNPro.woff2') format('woff2');
+      font-weight: 400 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 여백은 무조건 검정으로 고정 */
+    html, body {
+      width: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'SN Pro Local', 'SN Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* 고정 사이즈(390x844) — JS에서 화면 크기에 맞춰 통째로 scale() 함 */
+    .screen-container {
+      width: 390px;
+      height: 844px;
+      position: relative;
+      overflow: hidden;
+      transform-origin: center center;
+      background-image: url('./images/background.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 50px 0 0 0;
+    }
+
+    .status-bar {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px 16px;
+      width: 100%;
+      padding: 0 24px;
+    }
+
+    .app-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .app-item:active {
+      transform: scale(0.92);
+    }
+
+    .app-icon {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+      border-radius: 16px;
+      filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.25));
+    }
+
+    .app-label {
+      margin-top: 2px;
+      font-family: 'SN Pro Local', 'SN Pro', sans-serif;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #ffffff;
+      text-align: center;
+      text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6), 0px 0px 2px rgba(0, 0, 0, 0.4);
+      white-space: nowrap;
+      letter-spacing: -0.2px;
+    }
+
+    .dock-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 16px;
+    }
+
+    .dock-background {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 80px;
+      background-image: url('./images/icon_bar.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .dock-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      width: 100%;
+      padding: 0 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="screen-container">
+    <img src="../common/images/status_bar.png" class="status-bar" alt="Status Bar">
+
+    <div class="app-grid">
+      <a href="../mealivery/index.html" class="app-item">
+        <img src="./images/icon_Mealivery.png" alt="Mealivery" class="app-icon">
+        <span class="app-label">Mealivery</span>
+      </a>
+
+      <a href="../sleep/index.html" class="app-item">
+        <img src="./images/icon_Sleep.png" alt="Sleep Helper" class="app-icon">
+        <span class="app-label">Sleep Helper</span>
+      </a>
+    </div>
+
+    <div class="dock-container">
+      <div class="dock-background"></div>
+
+      <div class="dock-grid">
+        <a href="../phonecall/index.html" class="app-item">
+  <img src="./images/icon_Phone.png" alt="Phone" class="app-icon">
+  <span class="app-label">Phone</span>
+</a>
+        
+        <a href="../messages/index.html" class="app-item">
+  <img src="./images/icon_Messages.png" alt="Messages" class="app-icon">
+  <span class="app-label">Messages</span>
+</a>
+
+        <a href="https://youtube.com/playlist?list=PL9zvbozD1jbdsMhqsBP2C4_snGswBOBB9&si=rGskUH7jG94rpdFV" 
+   class="app-item" 
+   target="_blank" 
+   rel="noopener noreferrer">
+  <img src="./images/icon_Music.png" alt="Music" class="app-icon">
+  <span class="app-label">Music</span>
+</a>
+
+        <a href="../camera/index.html" class="app-item">
+          <img src="./images/icon_Camera.png" alt="Camera" class="app-icon">
+          <span class="app-label">Camera</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function resizeScreen() {
+      var frame = document.querySelector('.screen-container');
+      var scaleX = window.innerWidth / 390;
+      var scaleY = window.innerHeight / 844;
+      var scale = Math.min(scaleX, scaleY);
+      frame.style.transform = 'scale(' + scale + ')';
+    }
+    window.addEventListener('resize', resizeScreen);
+    window.addEventListener('load', resizeScreen);
+    resizeScreen();
+  </script>
+
+</body>
+</html>

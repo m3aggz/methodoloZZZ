@@ -1,0 +1,237 @@
+@font-face {
+  font-family: 'Honey Crepes';
+  src: url('../fonts/HoneyCrepes.woff2') format('woff2'),
+       url('../fonts/HoneyCrepes.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100dvh; /* 모바일 브라우저 툴바 대응 동적 높이 */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000; /* 여백은 검정으로 고정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-frame {
+  width: 390px;
+  height: 844px;
+  position: relative;
+  overflow: hidden;
+  transform-origin: center center;
+}
+
+/* ================= 공통 상단바 ================= */
+.status-bar {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.screen {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+/* ================= 메인 시작 화면 ================= */
+
+/* 시작 화면 배경 (Sleep_main_page_BG: 프레임 크기에 맞춘 고정 이미지 한 장) */
+#sleep-start-screen {
+  background-image: url('../images/Sleep_main_page_BG.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.exit-btn {
+  position: absolute;
+  top: 44px;
+  left: -6px;
+  width: 69px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 10;
+}
+.exit-btn img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.main-graphic {
+  position: absolute;
+  top: 86px;
+  left: 45px;
+  width: 300px;
+  height: 591px;
+  display: block;
+}
+
+.start-btn {
+  position: absolute;
+  top: 711px;
+  left: 86px;
+  width: 217px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 10;
+}
+.start-btn img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ================= 게임 플레이 화면 ================= */
+
+.game-screen {
+  background: rgba(39, 124, 193, 1);
+  cursor: pointer;
+}
+
+.score-label {
+  position: absolute;
+  top: 99px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 111px;
+  height: 24px;
+  display: block;
+  pointer-events: none;
+}
+
+.score-number {
+  position: absolute;
+  top: 148px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Honey Crepes', sans-serif;
+  font-size: 64px;
+  line-height: 1;
+  color: #fff;
+  -webkit-text-stroke: 1px rgba(47, 26, 11, 1);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.mug-shadow {
+  position: absolute;
+  top: 652px;
+  left: 55px;
+  width: 276px;
+  height: 68px;
+  background: rgba(52, 232, 211, 1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.mug-img {
+  position: absolute;
+  top: 450px;
+  left: 57px;
+  width: 301px;
+  height: 263px;
+  display: block;
+  pointer-events: none;
+}
+
+.milk-img {
+  position: absolute;
+  top: 456px;
+  left: 68px;
+  width: 200px;
+  height: 38px;
+  display: block;
+  pointer-events: none;
+}
+
+.flower-img {
+  position: absolute;
+  top: 546px;
+  left: 109px;
+  width: 122px;
+  height: 114px;
+  display: block;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+}
+
+.spoon-img {
+  position: absolute;
+  top: 300px;
+  left: 100px;
+  width: 62px;
+  height: 174px;
+  display: block;
+  pointer-events: none;
+  transform-origin: 50% 15%;
+}
+
+.stop-btn {
+  position: absolute;
+  top: 782px;
+  left: 271px;
+  width: 102px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 10;
+}
+.stop-btn img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes spoonStir {
+  0%    { transform: translate(0px, 0px) rotate(0deg); }
+  12.5% { transform: translate(16px, 1px) rotate(2deg); }
+  25%   { transform: translate(32px, 4px) rotate(3deg); }
+  37.5% { transform: translate(16px, 7px) rotate(2deg); }
+  50%   { transform: translate(0px, 8px) rotate(0deg); }
+  62.5% { transform: translate(-16px, 7px) rotate(-2deg); }
+  75%   { transform: translate(-32px, 4px) rotate(-3deg); }
+  87.5% { transform: translate(-16px, 1px) rotate(-2deg); }
+  100%  { transform: translate(0px, 0px) rotate(0deg); }
+}
+.spoon-img.stirring {
+  animation: spoonStir 0.6s ease-in-out 1;
+}
+
+@keyframes flowerSquash {
+  0%   { transform: scale(1, 1); }
+  30%  { transform: scale(1.15, 0.85); }
+  55%  { transform: scale(0.9, 1.12); }
+  75%  { transform: scale(1.05, 0.95); }
+  100% { transform: scale(1, 1); }
+}
+.flower-img.squashing {
+  animation: flowerSquash 0.4s ease-out 1;
+}

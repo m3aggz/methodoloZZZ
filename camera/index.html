@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>METHOD Z - Camera</title>
+<link href="./css/main.css" rel="stylesheet" />
+</head>    
+<body>
+
+<div class="app-frame">
+  <!-- 공용 상단바 없음 (이 화면만 예외) -->
+
+  <video id="camera-video" class="camera-video" autoplay muted loop playsinline></video>
+
+  <img class="bottom-bar" src="./images/Bottom.png" alt="" />
+
+  <button class="back-home-btn" id="back-home-btn" type="button" aria-label="홈으로">
+    <img src="./images/back_home.png" alt="홈으로" />
+  </button>
+
+  <button class="shutter-btn" id="shutter-btn" type="button" aria-label="재생/정지">
+    <img src="./images/shutter.png" alt="재생/정지" />
+  </button>
+
+  <div class="app-frame">
+  <!-- 배경 이미지 추가 -->
+  <img class="camera-bg" src="./images/camera_bg.png" alt="" />
+
+  <!-- 우측 회전 아이콘은 Bottom.png 안에 이미 그려진 장식용 그래픽이라 별도 버튼 없음 -->
+</div>
+<script src="./js/main.js"></script>
+</body>
+</html>

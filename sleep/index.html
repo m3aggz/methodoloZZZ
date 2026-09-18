@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <!-- viewport 메타 태그 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>METHOD Z - Sleep Helper</title>
+  <link href="https://fonts.googleapis.com/css?family=Honey+Crepes&display=swap" rel="stylesheet" />
+  <link href="./css/main.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="app-frame">
+
+    <!-- ⬇️ [추가] 최외각 컨테이너(.app-frame) 최상단에 상단바 배치 -->
+    <img src="../common/images/status_bar.png" class="status-bar" alt="Status Bar" />
+
+    <!-- Sleep Helper 시작 화면 -->
+    <div id="sleep-start-screen" class="screen">
+      <button id="exit-btn" class="exit-btn" type="button">
+        <img src="./images/exit.png" alt="게임 종료" />
+      </button>
+
+      <img class="main-graphic" src="./images/Sleep_main_graphic.png" alt="Sleep Helper" />
+
+      <button id="start-btn" class="start-btn" type="button">
+        <img src="./images/Sleep_start_bt.png" alt="꿀우유 저으러 가기" />
+      </button>
+    </div>
+
+    <!-- Sleep Helper 게임 플레이 화면 -->
+    <div id="sleep-game-screen" class="screen game-screen" hidden>
+
+      <img class="score-label" src="./images/Sleep_score.png" alt="score" />
+      <div id="score-number" class="score-number">0</div>
+
+      <div class="mug-shadow"></div>
+
+      <img id="mug-img" class="mug-img" src="./images/mug_0_99.png" alt="mug" />
+      <img id="milk-img" class="milk-img" src="./images/milk_0_99.png" alt="milk" />
+      <img id="flower-img" class="flower-img" src="./images/flower_0_99.png" alt="flower" />
+      <img id="spoon-img" class="spoon-img" src="./images/spoon.png" alt="spoon" />
+
+      <button id="stop-btn" class="stop-btn" type="button">
+        <img src="./images/stop_button.png" alt="그만젓기" />
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+  var startScreen = document.getElementById('sleep-start-screen');
+  var gameScreen = document.getElementById('sleep-game-screen');
+
+  var mugImg = document.getElementById('mug-img');
+  var milkImg = document.getElementById('milk-img');
+  var flowerImg = document.getElementById('flower-img');
+  var spoonImg = document.getElementById('spoon-img');
+  var scoreNumberEl = document.getElementById('score-number');
+
+  var score = 0;
+  var currentStage = null;
+
+  // 레벨업 오디오 객체 미리 생성
+  var levelupAudio = new Audio('./audio/level_up.wav');
+
+  // ==========================================
+  // 클릭 오디오 풀(Audio Pool) 설정 (연타 딜레이/먹통 해결)
+  // ==========================================
+  var POOL_SIZE = 5; // 동시 재생 가능한 채널 개수
+  var clickAudioPool = [];
+  var currentClickIndex = 0;
+
+  // 오디오 채널 5개 미리 생성
+  for (var i = 0; i < POOL_SIZE; i++) {
+    clickAudioPool.push(new Audio('./audio/click_sound.wav'));
+  }
+
+  // 모바일 오디오 제한 해제 (첫 터치/클릭 시 모든 오디오 채널을 미리 준비시킴)
+  function unlockAudio() {
+    clickAudioPool.forEach(function(audio) {
+      audio.play().then(function() {
+        audio.pause();
+        audio.currentTime = 0;
+      }).catch(function() {});
+    });
+
+    levelupAudio.play().then(function() {
+      levelupAudio.pause();
+      levelupAudio.currentTime = 0;
+    }).catch(function() {});
+
+    window.removeEventListener('click', unlockAudio);
+    window.removeEventListener('touchstart', unlockAudio);
+  }
+  window.addEventListener('click', unlockAudio);
+  window.addEventListener('touchstart', unlockAudio);
+  
+ // 탭 카운트 구간별 파일명 접미사 (에셋 실제 이름 기준: 0_99 / 100_499 / 500_999 / 1000_2999 / 3000_)
+function getStage(s) {
+  if (s < 100) return '0_99';
+  if (s < 500) return '100_499';
+  if (s < 1000) return '500_999';
+  if (s < 3000) return '1000_2999';
+  return '3000_';
+}
+
+  function playClickSound() {
+    // 오디오 풀에서 순환하며 재생
+    var audio = clickAudioPool[currentClickIndex];
+    audio.currentTime = 0;
+    audio.play().catch(function (e) { console.log('Click sound error:', e); });
+    currentClickIndex = (currentClickIndex + 1) % POOL_SIZE;
+  }
+
+  function playLevelupSound() {
+    levelupAudio.currentTime = 0;
+    levelupAudio.play().catch(function (e) { console.log('Levelup sound error:', e); });
+  }
+
+  function updateStageAssets() {
+    var stage = getStage(score);
+    if (stage === currentStage) return;
+
+    // 초기화(null)가 아니면서 스테이지가 넘어가면 레벨업 소리 재생
+    if (currentStage !== null) {
+      playLevelupSound();
+    }
+
+    currentStage = stage;
+    mugImg.src = './images/mug_' + stage + '.png';
+    milkImg.src = './images/milk_' + stage + '.png';
+    flowerImg.src = './images/flower_' + stage + '.png';
+  }
+
+  // 애니메이션 재생 트리거
+  function replay(el, className) {
+    el.classList.remove(className);
+    void el.offsetWidth;
+    el.classList.add(className);
+  }
+
+  function resetGame() {
+    score = 0;
+    currentStage = null;
+    scoreNumberEl.textContent = '0';
+    updateStageAssets();
+  }
+
+  function handleTap() {
+    score += 1;
+    scoreNumberEl.textContent = String(score);
+    updateStageAssets();
+    replay(spoonImg, 'stirring');
+    replay(flowerImg, 'squashing');
+    playClickSound();
+  }
+
+  function showGameScreen() {
+    resetGame();
+    startScreen.hidden = true;
+    gameScreen.hidden = false;
+  }
+
+  function showStartScreen() {
+    gameScreen.hidden = true;
+    startScreen.hidden = false;
+  }
+
+  document.getElementById('exit-btn').addEventListener('click', function () {
+    // exit 버튼 클릭 시 뒤로가기 또는 홈으로 이동 처리
+    window.location.href = '../home/index.html';
+  });
+
+  document.getElementById('start-btn').addEventListener('click', function () {
+    showGameScreen();
+  });
+
+  document.getElementById('stop-btn').addEventListener('click', function (e) {
+    e.stopPropagation();
+    showStartScreen();
+  });
+
+  gameScreen.addEventListener('click', function (e) {
+    if (e.target.closest('#stop-btn')) return;
+    handleTap();
+  });
+
+  function resizeAppFrame() {
+    var frame = document.querySelector('.app-frame');
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+
+    var scaleX = windowWidth / 390;
+    var scaleY = windowHeight / 844;
+    var scale = Math.min(scaleX, scaleY);
+
+    frame.style.transform = 'scale(' + scale + ')';
+  }
+
+  window.addEventListener('resize', resizeAppFrame);
+  window.addEventListener('load', resizeAppFrame);
+  resizeAppFrame();
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>METHOD Z - Phone Call</title>
+<link href="./css/main.css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="app-frame">
+  <img class="status-bar" src="./images/headline.png" alt="Status Bar" />
+
+  <div class="call-actions">
+    <div class="action-row">
+      <button class="action-item" id="mute-btn" type="button">
+        <img src="./images/mute.png" alt="Mute" />
+        <span>Mute</span>
+      </button>
+      <button class="action-item" id="facetime-btn" type="button">
+        <img src="./images/facetime.png" alt="Facetime" />
+        <span>Facetime</span>
+      </button>
+      <button class="action-item" id="speaker-btn" type="button">
+        <img src="./images/speaker.png" alt="Speaker" />
+        <span>Speaker</span>
+      </button>
+    </div>
+    <div class="action-row">
+      <button class="action-item" id="add-btn" type="button">
+        <img src="./images/add.png" alt="Add" />
+        <span>Add</span>
+      </button>
+      <button class="action-item" id="end-btn" type="button">
+        <img src="./images/end.png" alt="End" />
+        <span>End</span>
+      </button>
+      <button class="action-item" id="keypad-btn" type="button">
+        <img src="./images/keypad.png" alt="Keypad" />
+        <span>Keypad</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // End 버튼: 별도 기능 없이 페이지 이동만 (홈으로 복귀)
+  document.getElementById('end-btn').addEventListener('click', function () {
+    window.location.href = '../home/index.html';
+  });
+
+  function resizeAppFrame() {
+    var frame = document.querySelector('.app-frame');
+    var scaleX = window.innerWidth / 390;
+    var scaleY = window.innerHeight / 844;
+    var scale = Math.min(scaleX, scaleY);
+    frame.style.transform = 'scale(' + scale + ')';
+  }
+  window.addEventListener('resize', resizeAppFrame);
+  window.addEventListener('load', resizeAppFrame);
+  resizeAppFrame();
+</script>
+
+</body>
+</html>

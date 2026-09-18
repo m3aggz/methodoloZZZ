@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>METHOD Z</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background-color: #000;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* 390x844 고정 프레임 + JS 스케일링 (홈/Sleep Helper와 동일) */
+  #frame {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 390px; height: 844px;
+    transform-origin: center center;
+    overflow: hidden;
+  }
+
+  /* 배경: 프레임을 꽉 채우는 단일 이미지 */
+  #bg {
+    position: absolute; top: 0; left: 0;
+    width: 390px; height: 844px;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* 꿀벌 = 홈 버튼 */
+  #bee-home {
+    position: absolute;
+    top: 330px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 165px;
+    display: block;
+    border: 0; background: none; padding: 0;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  #bee-home img {
+    width: 100%; height: auto; display: block;
+    user-select: none;
+  }
+  #bee-home:active { transform: translateX(-50%) scale(0.94); }
+</style>
+</head>
+<body>
+
+<div id="frame">
+  <img id="bg" src="images/Mealivery_bg.png" alt="">
+
+  <a id="bee-home" href="../home/index.html" aria-label="홈 화면으로 돌아가기">
+    <img src="images/bee.png" alt="꿀벌">
+  </a>
+</div>
+
+<script>
+  function resizeFrame() {
+    var frame = document.getElementById('frame');
+    var scale = Math.min(window.innerWidth / 390, window.innerHeight / 844);
+    frame.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
+  }
+  window.addEventListener('resize', resizeFrame);
+  window.addEventListener('orientationchange', resizeFrame);
+  resizeFrame();
+</script>
+
+</body>
+</html>

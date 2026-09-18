@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>METHOD Z - Messages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="./css/main.css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="app-frame">
+  <img class="status-bar" src="../common/images/status_bar.png" alt="Status Bar" />
+
+  <!-- 배경 (고정 사이즈 한 장) -->
+  <img class="bg" src="./images/message_bg.png" alt="" />
+
+  <!-- 헤더 (Messages 텍스트가 이미 이미지에 포함됨) -->
+  <img class="header-tab" src="./images/tab.png" alt="Messages" />
+  <button class="back-btn" id="back-btn" type="button" aria-label="뒤로가기">
+    <img src="./images/back.png" alt="뒤로가기" />
+  </button>
+  <button class="info-btn" id="info-btn" type="button" aria-label="도움말">
+    <img src="./images/info_button.png" alt="도움말" />
+  </button>
+
+  <!-- 채팅 목록 (스크롤 영역) — 기본 상태는 비어있음 -->
+  <div class="chat-body" id="chat-body"></div>
+
+<!-- 하단 입력 독 (키보드 대응을 위해 하나의 컨테이너로 묶음) -->
+  <div class="input-dock" id="input-dock">
+    <button class="avatar-toggle-btn" id="avatar-toggle-btn" type="button" aria-label="발신인 변경">
+      <img id="avatar-toggle-img" src="./images/minjun_button.png" alt="민준(나)" />
+    </button>
+    <textarea class="message-input" id="message-input" rows="1" placeholder=""></textarea>
+    <button class="send-btn" id="send-btn" type="button" aria-label="전송">
+      <img src="./images/send.png" alt="전송" />
+    </button>
+  </div>
+
+  <!-- 도움말 팝업 (이미지 한 장) -->
+  <div class="help-overlay hidden" id="help-overlay">
+    <div class="help-modal-wrap">
+      <img class="help-modal-img" src="./images/info.png" alt="사용 가이드" />
+      <button class="help-close-btn" id="help-close-btn" type="button" aria-label="닫기"></button>
+    </div>
+  </div>
+
+</div>
+
+<script src="./js/main.js"></script>
+</body>
+</html>

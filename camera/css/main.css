@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000; /* 프레임 바깥 여백은 검정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 고정 사이즈(390x844) — JS에서 화면 크기에 맞춰 scale() */
+.app-frame {
+  width: 390px;
+  height: 844px;
+  position: relative;
+  overflow: hidden;
+  
+  transform-origin: center center;
+  background: #000;
+}
+
+/* 고정 배경 이미지 스타일 */
+.camera-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 프레임 크기에 맞춰 비율을 유지하며 채움 */
+  z-index: 1;        /* 비디오 및 버튼 요소보다 뒤로 배치 */
+  pointer-events: none; /* 클릭/터치 이벤트 방해 금지 */
+}
+
+/* 영상: 390px 프레임 내에서 가로 너비 기준 확장 */
+.camera-video {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  transform: translateY(-50%);
+  object-fit: contain;
+  z-index: 2;        /* 배경(camera-bg) 아래 레이어 */
+}
+
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 390px;
+  height: 110px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.back-home-btn {
+  position: absolute;
+  top: 768px;
+  left: 30px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 11;
+}
+.back-home-btn img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.shutter-btn {
+  position: absolute;
+  top: 756px;
+  left: 160px;
+  width: 72px;
+  height: 72px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 11;
+}
+.shutter-btn img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

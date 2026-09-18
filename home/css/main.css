@@ -1,0 +1,229 @@
+@charset "UTF-8";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 상단 상태바 스타일 */
+.status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 100; /* 콘텐츠보다 위에 떠 있도록 설정 */
+  pointer-events: none; /* 아이콘 클릭을 방해하지 않도록 설정 */
+}
+
+/* 화면 중앙 정렬 */
+body {
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* 모바일 프레임 컨테이너 */
+.v297_1176 {
+  width: 390px;
+  height: 844px;
+  position: relative; /* absolute에서 relative로 변경 */
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* 배경 이미지 강제 전체 적용 */
+.bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Dock 배경 이미지 */
+.v297_1245 {
+  width: 389px;
+  height: 68px;
+  position: absolute;
+  top: 776px;
+  left: 0px;
+  z-index: 1;
+}
+
+.dock-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 피그마의 중복 배경 레이어 숨김 */
+.v297_1246, .v297_1247 {
+  display: none;
+}
+
+/* 최외각 모바일 화면 (배경화면 이미지 직접 적용) */
+.v297_1176 {
+  width: 390px;
+  height: 844px;
+  background: url("../images/background.png") no-repeat center / cover;
+  position: relative;
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* 하단 Dock 바 배경 */
+.v297_1245 {
+  width: 389px;
+  height: 68px;
+  background: url("../images/icon_bar.png") no-repeat center / cover;
+  position: absolute;
+  top: 776px;
+  left: 0px;
+}
+
+/* 피그마에서 생성된 불필요한 그라데이션 레이어 숨김 처리 */
+.v297_1246, .v297_1247 {
+  display: none;
+}
+
+/* -------------------------------------------------- */
+/* 앱 아이콘 및 라벨 위치 */
+/* -------------------------------------------------- */
+
+/* 앱 아이콘 1: Sleep Helper */
+.v297_1250 {
+  width: 75px;
+  height: 77px;
+  position: absolute;
+  top: 40px;
+  left: 111px;
+}
+.v297_1251, .v297_1252, .v297_1253 {
+  display: none; /* 하위 분할 레이어 숨김 */
+}
+.v297_1250::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  background: url("../images/icon_Sleep.png") no-repeat center / contain;
+}
+
+/* 앱 아이콘 2: Mealivery */
+.v297_1280 {
+  width: 75px;
+  height: 77px;
+  position: absolute;
+  top: 40px;
+  left: 20px;
+}
+.v297_1281, .v297_1282 {
+  display: none;
+}
+.v297_1280::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  background: url("../images/icon_Mealivery.png") no-repeat center / contain;
+}
+
+/* 하단 Dock 아이콘들 */
+/* Phone */
+.v297_1309 {
+  width: 75px;
+  height: 77px;
+  position: absolute;
+  top: 748px;
+  left: 20px;
+  z-index: 10;
+}
+.v297_1310 { display: none; }
+.v297_1309::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  background: url("../images/icon_Phone.png") no-repeat center / contain;
+}
+
+/* Messages */
+.v297_1333 {
+  width: 75px;
+  height: 77px;
+  position: absolute;
+  top: 748px;
+  left: 111px;
+  z-index: 10;
+}
+.v297_1334 { display: none; }
+.v297_1333::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  background: url("../images/icon_Messages.png") no-repeat center / contain;
+}
+
+/* Music */
+.v297_1336 {
+  width: 75px;
+  height: 77px;
+  position: absolute;
+  top: 748px;
+  left: 202px;
+  z-index: 10;
+}
+.v297_1337 { display: none; }
+.v297_1336::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  background: url("../images/icon_Music.png") no-repeat center / contain;
+}
+
+/* Camera */
+.v297_1388 {
+  width: 75px;
+  height: 77px;
+  position: absolute;
+  top: 748px;
+  left: 293px;
+  z-index: 10;
+}
+.v297_1389 { display: none; }
+.v297_1388::before {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  background: url("../images/icon_Camera.png") no-repeat center / contain;
+}
+
+/* 라벨 텍스트 스타일 공통 */
+.v297_1279, .v297_1308, .v297_1332, .v297_1335, .v297_1387, .v297_1397 {
+  width: 75px;
+  color: #ffffff;
+  position: absolute;
+  top: 62px;
+  left: 0px;
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+}
